@@ -1,0 +1,198 @@
+[gd_scene format=3 uid="uid://baon6ihg2mlwe"]
+
+[ext_resource type="Texture2D" uid="uid://r1mlajtdk1nj" path="res://assets/background/backgroundOutside.png" id="1_iuonh"]
+[ext_resource type="Script" uid="uid://bb634aeas8kby" path="res://scenes/main/mainmenu.gd" id="1_m4h2d"]
+[ext_resource type="Texture2D" uid="uid://dicckevteapii" path="res://assets/logos/Logo.png" id="2_k2fmo"]
+[ext_resource type="Texture2D" uid="uid://cgepr8n28s0kp" path="res://assets/character.png" id="3_k2fmo"]
+[ext_resource type="Texture2D" uid="uid://flinaid8eod8" path="res://assets/ladoo/001.png" id="4_ouso4"]
+[ext_resource type="Texture2D" uid="uid://bs7fo2tyckk8c" path="res://assets/ui/playButton.png" id="4_th5th"]
+[ext_resource type="Texture2D" uid="uid://3uqlapie6fxp" path="res://assets/ui/playButtonPressed.png" id="5_7smn1"]
+[ext_resource type="Texture2D" uid="uid://csnl2cdrww76f" path="res://assets/ladoo/002.png" id="5_blune"]
+[ext_resource type="Texture2D" uid="uid://bl0si7nh7h01p" path="res://assets/ladoo/003.png" id="6_th5th"]
+[ext_resource type="Texture2D" uid="uid://b1om4yv2tjjoj" path="res://assets/ladoo/004.png" id="7_7smn1"]
+[ext_resource type="Texture2D" uid="uid://dywt6gkcq7vjt" path="res://assets/ladoo/005.png" id="8_raeie"]
+[ext_resource type="Texture2D" uid="uid://c7dretpi2sqm8" path="res://assets/ladoo/006.png" id="9_hxu8e"]
+[ext_resource type="Texture2D" uid="uid://ufb4hkk0s17q" path="res://assets/ladoo/007.png" id="10_nvumn"]
+[ext_resource type="Texture2D" uid="uid://bv7mapbxolnrc" path="res://assets/ladoo/008.png" id="11_ou6is"]
+[ext_resource type="Texture2D" uid="uid://o8vy2p7hlm5b" path="res://assets/ui/ep.png" id="14_7smn1"]
+[ext_resource type="Texture2D" uid="uid://btyhkbrdodvx2" path="res://assets/ui/rewards.png" id="15_nvumn"]
+[ext_resource type="Texture2D" uid="uid://coufm6kgpihiw" path="res://assets/ui/parents.png" id="16_ou6is"]
+[ext_resource type="Texture2D" uid="uid://ylb1de8subl4" path="res://assets/ui/settings.png" id="17_necax"]
+[ext_resource type="Texture2D" uid="uid://bev7jnr4l2b0q" path="res://assets/ui/sound1.png" id="18_necax"]
+[ext_resource type="Texture2D" uid="uid://jcnyiwyobpbd" path="res://assets/ui/mute2.png" id="19_r4lks"]
+[ext_resource type="Texture2D" uid="uid://j1khbnbgilk4" path="res://assets/ui/sound.png" id="20_pg34l"]
+[ext_resource type="Texture2D" uid="uid://h2735fwev3tp" path="res://assets/ui/mute.png" id="21_m4h2d"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v8qb6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("4_ouso4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_blune")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_th5th")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_7smn1")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_raeie")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hxu8e")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_nvumn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_ou6is")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
+
+[node name="MainMenu" type="Node2D" unique_id=12820390]
+script = ExtResource("1_m4h2d")
+
+[node name="Background" type="TextureRect" parent="." unique_id=44090307]
+offset_right = 1280.0
+offset_bottom = 720.0
+texture = ExtResource("1_iuonh")
+expand_mode = 1
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=709021835]
+
+[node name="RootUI" type="Control" parent="UI" unique_id=1530206485]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="GameLogo" type="TextureRect" parent="UI/RootUI" unique_id=520696247]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -250.0
+offset_right = 250.0
+offset_bottom = 300.0
+grow_horizontal = 2
+texture = ExtResource("2_k2fmo")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Bheem" type="TextureRect" parent="UI/RootUI" unique_id=170007598]
+layout_mode = 0
+offset_left = 213.0
+offset_top = 199.00002
+offset_right = 906.33325
+offset_bottom = 1689.0
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_k2fmo")
+
+[node name="PlayButton" type="TextureButton" parent="UI/RootUI" unique_id=711060600]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = 20.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture_normal = ExtResource("4_th5th")
+texture_pressed = ExtResource("5_7smn1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="Ladoo" type="AnimatedSprite2D" parent="UI/RootUI" unique_id=1113446287]
+position = Vector2(979, 321)
+scale = Vector2(0.6, 0.6)
+sprite_frames = SubResource("SpriteFrames_v8qb6")
+autoplay = "default"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/RootUI" unique_id=996209247]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -170.0
+offset_bottom = -50.0
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 0
+theme_override_constants/separation = 4
+alignment = 1
+
+[node name="EpisodesButton" type="TextureButton" parent="UI/RootUI/HBoxContainer" unique_id=74495671]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+texture_normal = ExtResource("14_7smn1")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="RewardsButton" type="TextureButton" parent="UI/RootUI/HBoxContainer" unique_id=1404621832]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+texture_normal = ExtResource("15_nvumn")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="ParentsButton" type="TextureButton" parent="UI/RootUI/HBoxContainer" unique_id=1429615732]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+texture_normal = ExtResource("16_ou6is")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SettingsButton" type="TextureButton" parent="UI/RootUI/HBoxContainer" unique_id=493276704]
+custom_minimum_size = Vector2(200, 120)
+layout_mode = 2
+texture_normal = ExtResource("17_necax")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MusicButton" type="TextureButton" parent="UI/RootUI" unique_id=2094250348]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -120.0
+offset_top = 50.0
+offset_right = -50.0
+offset_bottom = 120.0
+grow_horizontal = 0
+toggle_mode = true
+texture_normal = ExtResource("18_necax")
+texture_pressed = ExtResource("19_r4lks")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SoundButton" type="TextureButton" parent="UI/RootUI" unique_id=337314680]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 50.0
+offset_right = -130.0
+offset_bottom = 120.0
+grow_horizontal = 0
+toggle_mode = true
+texture_normal = ExtResource("20_pg34l")
+texture_pressed = ExtResource("21_m4h2d")
+ignore_texture_size = true
+stretch_mode = 5
+
+[connection signal="pressed" from="UI/RootUI/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="UI/RootUI/HBoxContainer/EpisodesButton" to="." method="_on_episodes_button_pressed"]

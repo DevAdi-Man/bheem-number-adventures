@@ -1,0 +1,114 @@
+[gd_scene format=3 uid="uid://btoxytqxwjvig"]
+
+[ext_resource type="Texture2D" uid="uid://ivp2a41ebt6l" path="res://assets/background/EpisodeBackground.png" id="1_8r3iy"]
+[ext_resource type="Script" uid="uid://bne0e44rq60cn" path="res://scenes/play.gd" id="1_bofkp"]
+[ext_resource type="Texture2D" uid="uid://1erxiqh604qk" path="res://assets/ui/leftback.png" id="3_bq38n"]
+[ext_resource type="Texture2D" uid="uid://crdrijanfrvhl" path="res://assets/ui/bannerInside.png" id="4_65v2a"]
+[ext_resource type="Texture2D" uid="uid://caxpu2hgvbxl4" path="res://assets/ui/questionBanner.png" id="4_hsi3f"]
+
+[node name="Play" type="Control" unique_id=1964745712]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_bofkp")
+
+[node name="Background" type="TextureRect" parent="." unique_id=1749263980]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_8r3iy")
+expand_mode = 1
+
+[node name="UI" type="Control" parent="." unique_id=791357563]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackButton" type="TextureButton" parent="UI" unique_id=496905450]
+custom_minimum_size = Vector2(80, 80)
+layout_mode = 0
+offset_left = 20.0
+offset_top = 30.0
+offset_right = 100.0
+offset_bottom = 110.0
+texture_normal = ExtResource("3_bq38n")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="SubQuestion" type="TextureRect" parent="UI" unique_id=2144853301]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -240.0
+offset_top = 115.0
+offset_right = 240.0
+offset_bottom = 215.0
+grow_horizontal = 2
+texture = ExtResource("4_65v2a")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/SubQuestion" unique_id=415662879]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -115.5
+offset_top = -11.5
+offset_right = 115.5
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.42352942, 0.14509805, 0.49019608, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_font_sizes/font_size = 28
+text = "How many nose Bheem have?"
+
+[node name="Question" type="TextureRect" parent="UI" unique_id=1077789392]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -278.0
+offset_top = 40.0
+offset_right = 282.0
+offset_bottom = 190.0
+grow_horizontal = 2
+texture = ExtResource("4_hsi3f")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="UI/Question" unique_id=1798575291]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -183.5
+offset_top = -60.0
+offset_right = 183.5
+offset_bottom = 12.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.9764706, 0.88235295, 0.41568628, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.92156863)
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 6
+theme_override_constants/shadow_offset_y = 4
+theme_override_font_sizes/font_size = 52
+text = "LET'S COUNTS!"
+
+[connection signal="pressed" from="UI/BackButton" to="." method="_on_back_button_pressed"]
