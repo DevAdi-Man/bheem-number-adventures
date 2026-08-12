@@ -5,6 +5,56 @@
 [ext_resource type="Texture2D" uid="uid://1erxiqh604qk" path="res://assets/ui/leftback.png" id="3_bq38n"]
 [ext_resource type="Texture2D" uid="uid://crdrijanfrvhl" path="res://assets/ui/bannerInside.png" id="4_65v2a"]
 [ext_resource type="Texture2D" uid="uid://caxpu2hgvbxl4" path="res://assets/ui/questionBanner.png" id="4_hsi3f"]
+[ext_resource type="Texture2D" uid="uid://ci75pmje8pp8u" path="res://assets/ui/nose_02.png" id="6_rn3jn"]
+[ext_resource type="Texture2D" uid="uid://6su57b23a01q" path="res://assets/ui/nose_01.png" id="7_r6ama"]
+[ext_resource type="Texture2D" uid="uid://bm4mr513kl1t" path="res://assets/ui/nose_06.png" id="8_6fc6i"]
+[ext_resource type="Texture2D" uid="uid://blef5ljjlq4wi" path="res://assets/nose_character__bheem.png" id="9_efqae"]
+[ext_resource type="Texture2D" uid="uid://cpv6hyls7igbk" path="res://assets/ui/nose_04.png" id="9_hogub"]
+[ext_resource type="Texture2D" uid="uid://b7cum35gyygg3" path="res://assets/ui/nose_10.png" id="10_ogtmt"]
+[ext_resource type="Texture2D" uid="uid://deptdiihlp4rj" path="res://assets/ui/nose_08.png" id="11_cd23g"]
+[ext_resource type="AudioStream" uid="uid://dlcj6mhnq1dxo" path="res://assets/sound/answer.mp3" id="13_ogtmt"]
+[ext_resource type="Texture2D" uid="uid://c2yqpnba3815" path="res://assets/fruits/frutisPlate.png" id="13_yqana"]
+[ext_resource type="AudioStream" uid="uid://dv56fx3xuolyx" path="res://assets/sound/wrong_answer.mp3" id="14_cd23g"]
+[ext_resource type="Texture2D" uid="uid://dmpdckg1c4yrd" path="res://assets/ui/butterflySprite.png" id="14_grj6y"]
+[ext_resource type="AudioStream" uid="uid://b1kculh4dhw87" path="res://assets/sound/001.mp3" id="15_yqana"]
+[ext_resource type="AudioStream" uid="uid://b8apu21oei6rj" path="res://assets/sound/01.mp3" id="16_grj6y"]
+[ext_resource type="AudioStream" uid="uid://cyvc4s0rlihnk" path="res://assets/sound/button2.wav" id="17_cd23g"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lalcm"]
+atlas = ExtResource("14_grj6y")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b366c"]
+atlas = ExtResource("14_grj6y")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1hu6x"]
+atlas = ExtResource("14_grj6y")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a5y4h"]
+atlas = ExtResource("14_grj6y")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_v8qb6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lalcm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b366c")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1hu6x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a5y4h")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 8.0
+}]
 
 [node name="Play" type="Control" unique_id=1964745712]
 layout_mode = 3
@@ -57,7 +107,8 @@ grow_horizontal = 2
 texture = ExtResource("4_65v2a")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/SubQuestion" unique_id=415662879]
+[node name="subQuestionsLabel" type="Label" parent="UI/SubQuestion" unique_id=415662879]
+custom_minimum_size = Vector2(420, 0)
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -76,6 +127,7 @@ theme_override_constants/shadow_offset_x = 0
 theme_override_constants/shadow_offset_y = 0
 theme_override_font_sizes/font_size = 28
 text = "How many nose Bheem have?"
+autowrap_mode = 3
 
 [node name="Question" type="TextureRect" parent="UI" unique_id=1077789392]
 layout_mode = 1
@@ -90,7 +142,7 @@ grow_horizontal = 2
 texture = ExtResource("4_hsi3f")
 expand_mode = 1
 
-[node name="Label" type="Label" parent="UI/Question" unique_id=1798575291]
+[node name="questionsLabel" type="Label" parent="UI/Question" unique_id=1798575291]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -111,4 +163,173 @@ theme_override_constants/shadow_offset_y = 4
 theme_override_font_sizes/font_size = 52
 text = "LET'S COUNTS!"
 
+[node name="AnswerQuestion" type="GridContainer" parent="UI" unique_id=151968536]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -100.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = -600
+columns = 3
+
+[node name="AnswerButton1" type="TextureButton" parent="UI/AnswerQuestion" unique_id=1213020898]
+custom_minimum_size = Vector2(200, 280)
+layout_mode = 2
+size_flags_horizontal = 6
+toggle_mode = true
+texture_normal = ExtResource("6_rn3jn")
+texture_pressed = ExtResource("7_r6ama")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="AnswerLabel1" type="Label" parent="UI/AnswerQuestion/AnswerButton1" unique_id=1705113777]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -36.0
+offset_right = 20.0
+offset_bottom = 36.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.7882353)
+theme_override_font_sizes/font_size = 52
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnswerButton2" type="TextureButton" parent="UI/AnswerQuestion" unique_id=2079525258]
+custom_minimum_size = Vector2(200, 280)
+layout_mode = 2
+size_flags_horizontal = 6
+toggle_mode = true
+texture_normal = ExtResource("8_6fc6i")
+texture_pressed = ExtResource("9_hogub")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="AnswerLabel2" type="Label" parent="UI/AnswerQuestion/AnswerButton2" unique_id=379598332]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.78431374)
+theme_override_font_sizes/font_size = 52
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnswerButton3" type="TextureButton" parent="UI/AnswerQuestion" unique_id=351111988]
+custom_minimum_size = Vector2(200, 280)
+layout_mode = 2
+size_flags_horizontal = 6
+toggle_mode = true
+texture_normal = ExtResource("10_ogtmt")
+texture_pressed = ExtResource("11_cd23g")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="AnswerLabel3" type="Label" parent="UI/AnswerQuestion/AnswerButton3" unique_id=664956947]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -11.5
+offset_right = 20.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.6862745)
+theme_override_font_sizes/font_size = 52
+text = "0"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="character" type="TextureRect" parent="UI" unique_id=1634294170]
+custom_minimum_size = Vector2(220, 500)
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 30.0
+offset_top = -610.0
+offset_right = 250.0
+offset_bottom = -110.0
+grow_vertical = 0
+texture = ExtResource("9_efqae")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="laddoPlate" type="TextureRect" parent="UI" unique_id=1588812250]
+custom_minimum_size = Vector2(400, 200)
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -200.0
+offset_right = 200.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("13_yqana")
+expand_mode = 1
+stretch_mode = 5
+
+[node name="Butterfly" type="AnimatedSprite2D" parent="UI" unique_id=1437737494]
+visible = false
+sprite_frames = SubResource("SpriteFrames_v8qb6")
+autoplay = "default"
+frame_progress = 0.21085818
+
+[node name="Butterfly2" type="AnimatedSprite2D" parent="UI" unique_id=1830196771]
+visible = false
+sprite_frames = SubResource("SpriteFrames_v8qb6")
+autoplay = "default"
+frame_progress = 0.12873687
+
+[node name="Butterfly3" type="AnimatedSprite2D" parent="UI" unique_id=1204856451]
+visible = false
+sprite_frames = SubResource("SpriteFrames_v8qb6")
+autoplay = "default"
+frame_progress = 0.12873687
+
+[node name="RightAnswerSound" type="AudioStreamPlayer" parent="." unique_id=774089354]
+stream = ExtResource("13_ogtmt")
+
+[node name="WrongAnswerSound" type="AudioStreamPlayer" parent="." unique_id=864755173]
+stream = ExtResource("14_cd23g")
+
+[node name="SubQuestionSound" type="AudioStreamPlayer" parent="." unique_id=1482351634]
+stream = ExtResource("15_yqana")
+
+[node name="QuestionSound" type="AudioStreamPlayer" parent="." unique_id=619097911]
+stream = ExtResource("16_grj6y")
+
+[node name="ButtonPressSound" type="AudioStreamPlayer" parent="." unique_id=1210423449]
+stream = ExtResource("17_cd23g")
+
 [connection signal="pressed" from="UI/BackButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="UI/AnswerQuestion/AnswerButton1" to="." method="_on_answer_button_1_pressed"]
+[connection signal="pressed" from="UI/AnswerQuestion/AnswerButton2" to="." method="_on_answer_button_2_pressed"]
+[connection signal="pressed" from="UI/AnswerQuestion/AnswerButton3" to="." method="_on_answer_button_3_pressed"]
