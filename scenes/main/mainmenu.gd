@@ -5,6 +5,7 @@ extends Node2D
 
 func _ready() -> void:
 	SaveManager.load_game()
+	
 
 #var musicOnOrOff: bool = false
 func _on_play_button_pressed() -> void:
