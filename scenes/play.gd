@@ -1,8 +1,10 @@
 extends Control
 
 @onready var background: TextureRect = $Background
-@onready var sub_question: Label = $UI/SubQuestion/subQuestionsLabel
-@onready var question: Label = $UI/Question/questionsLabel
+@onready var sub_question: TextureRect = $UI/SubQuestion
+@onready var sub_question_label: Label = $UI/SubQuestion/subQuestionsLabel
+@onready var question: TextureRect = $UI/Question
+@onready var question_label: Label = $UI/Question/questionsLabel
 @onready var answer_button_1: TextureButton = $UI/AnswerQuestion/AnswerButton1
 @onready var answer_button_2: TextureButton = $UI/AnswerQuestion/AnswerButton2
 @onready var answer_button_3: TextureButton = $UI/AnswerQuestion/AnswerButton3
@@ -25,6 +27,9 @@ extends Control
 @onready var wrong_answer_sound: AudioStreamPlayer = $WrongAnswerSound
 @onready var button_press_sound: AudioStreamPlayer = $ButtonPressSound
 @onready var laddoo_plates: TextureRect = $UI/laddoPlate
+
+
+@onready var next_button: TextureButton = $UI/NextButton
 
 
 var nose_bheem_character = preload('res://assets/nose_character__bheem.png')
@@ -60,6 +65,7 @@ var wrong_attempts := 0
 
 
 func _ready():
+	next_button.visible = false
 	print("Selected Episode: ", GameState.selected_episode)
 	load_episode()
 	setup_answer_buttons()
@@ -106,8 +112,8 @@ func load_episode_one()-> void:
 	character.texture = nose_bheem_character
 	background.texture = background_episode
 	print("question1")
-	question.text = "LET'S COUNTS!"
-	sub_question.text = "How many nose Bheem have?"
+	question_label.text = "LET'S COUNTS!"
+	sub_question_label.text = "How many nose Bheem have?"
 	
 	question_sound.stream = episode_one_question_sound
 	sub_question_sound.stream = episode_one_sub_question_sound
@@ -121,9 +127,9 @@ func load_episode_two()-> void:
 	character.texture = laddoo_bheem_character
 	character.position = Vector2(270,110)
 	answer_question.position = Vector2(230, 250)
-	question.text = "LET'S COUNTS!"
-	sub_question.text = "How many laddoos are there on the plates?"
-	sub_question.add_theme_font_size_override("font_size", 24)
+	question_label.text = "LET'S COUNTS!"
+	sub_question_label.text = "How many laddoos are there on the plates?"
+	sub_question_label.add_theme_font_size_override("font_size", 24)
 	
 	question_sound.stream = episode_one_question_sound
 	sub_question_sound.stream = episode_two_sub_question_sound
@@ -146,8 +152,8 @@ func load_episode_three()-> void:
 	butterfly.position = Vector2(460,400)
 	butterfly2.position = Vector2(800,420)
 	butterfly3.position = Vector2(540,480)
-	question.text = "LET'S COUNT!"
-	sub_question.text = "How many butterflies flutring new flower"
+	question_label.text = "LET'S COUNT!"
+	sub_question_label.text = "How many butterflies flutring new flower"
 	character.texture = laddoo_bheem_character
 	character.position = Vector2(30,200)
 	answer_question.position = Vector2(0, 500)
@@ -161,8 +167,8 @@ func load_episode_three()-> void:
 	answer_button_label_2.text = "5"
 	answer_button_label_3.text = "3"
 
-# Animation for texts and other components comes
 func play_intro_animation() -> void:
+	next_button.visible = false
 	answers_enabled = false
 
 	# Disable buttons while animation is playing
@@ -197,21 +203,20 @@ func play_intro_animation() -> void:
 	
 	# Question banner
 	var tween := create_tween()
-
 	tween.set_parallel(true)
 
 	tween.tween_property(
 		question,
 		"position",
 		question_pos,
-		0.7
-	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		1.0
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 
 	tween.tween_property(
 		question,
 		"modulate:a",
 		1.0,
-		0.5
+		0.8
 	)
 
 	await tween.finished
@@ -220,21 +225,20 @@ func play_intro_animation() -> void:
 	await question_sound.finished
 	# Sub-question
 	var sub_tween := create_tween()
-
 	sub_tween.set_parallel(true)
 
 	sub_tween.tween_property(
 		sub_question,
 		"position",
 		sub_question_pos,
-		0.5
-	).set_trans(Tween.TRANS_QUAD).set_ease(Tween.EASE_OUT)
+		0.8
+	).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
 	
 	sub_tween.tween_property(
 		sub_question,
 		"modulate:a",
 		1.0,
-		0.4
+		0.6
 	)
 	
 	await sub_tween.finished
@@ -262,21 +266,20 @@ func animate_answer(
 	final_position: Vector2
 ) -> void:
 	var tween := create_tween()
-
 	tween.set_parallel(true)
 
 	tween.tween_property(
 		button,
 		"position",
 		final_position,
-		0.45
+		0.7
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
 
 	tween.tween_property(
 		button,
 		"modulate:a",
 		1.0,
-		0.3
+		0.5
 	)
 
 	await tween.finished
@@ -314,7 +317,11 @@ func check_answer(answer: int) -> void:
 		SaveManager.save_game()
 		right_answer_sound.play()
 		await right_answer_sound.finished
-		get_tree().change_scene_to_file("res://scenes/episodes/episodes.tscn")
+		
+		if GameState.selected_episode >= 3:
+			_play_exit_animation(false)
+		else:
+			next_button.visible = true
 	else:
 		wrong_attempts += 1
 		print("Wrong answer!")
@@ -380,3 +387,89 @@ func animate_button_release(button: TextureButton) -> void:
 		Vector2(1.0, 1.0),
 		0.12
 	).set_trans(Tween.TRANS_BACK).set_ease(Tween.EASE_OUT)
+
+
+func _on_next_button_pressed() -> void:
+	_play_exit_animation(true)
+
+func _play_exit_animation(from_next_button: bool = false) -> void:
+	if from_next_button:
+		button_press_sound.play()
+		next_button.visible = false
+	
+	var q_pos := question.position
+	var sq_pos := sub_question.position
+	var a1_pos := answer_button_1.position
+	var a2_pos := answer_button_2.position
+	var a3_pos := answer_button_3.position
+	var char_pos := character.position
+	var l_pos := laddoo_plates.position
+	var b1_pos := butterfly.position
+	var b2_pos := butterfly2.position
+	var b3_pos := butterfly3.position
+	
+	var tween_out = create_tween()
+	tween_out.set_parallel(true)
+	
+	tween_out.tween_property(question, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_out.tween_property(question, "position:y", q_pos.y - 250, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	tween_out.tween_property(sub_question, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_out.tween_property(sub_question, "position:y", sq_pos.y - 150, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	tween_out.tween_property(answer_button_1, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_out.tween_property(answer_button_1, "position:y", a1_pos.y + 250, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	tween_out.tween_property(answer_button_2, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_out.tween_property(answer_button_2, "position:y", a2_pos.y + 250, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	tween_out.tween_property(answer_button_3, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_out.tween_property(answer_button_3, "position:y", a3_pos.y + 250, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	tween_out.tween_property(character, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	tween_out.tween_property(character, "position:x", char_pos.x - 200, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	if butterfly.visible:
+		tween_out.tween_property(butterfly, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween_out.tween_property(butterfly, "position:y", b1_pos.y - 200, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween_out.tween_property(butterfly2, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween_out.tween_property(butterfly2, "position:y", b2_pos.y - 200, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween_out.tween_property(butterfly3, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween_out.tween_property(butterfly3, "position:y", b3_pos.y - 200, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		
+	if laddoo_plates.visible:
+		tween_out.tween_property(laddoo_plates, "modulate:a", 0.0, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+		tween_out.tween_property(laddoo_plates, "position:y", l_pos.y + 200, 0.6).set_trans(Tween.TRANS_SINE).set_ease(Tween.EASE_IN_OUT)
+	
+	await tween_out.finished
+	
+	# Restore original positions
+	question.position = q_pos
+	sub_question.position = sq_pos
+	answer_button_1.position = a1_pos
+	answer_button_2.position = a2_pos
+	answer_button_3.position = a3_pos
+	character.position = char_pos
+	laddoo_plates.position = l_pos
+	butterfly.position = b1_pos
+	butterfly2.position = b2_pos
+	butterfly3.position = b3_pos
+	
+	butterfly.visible = false
+	butterfly2.visible = false
+	butterfly3.visible = false
+	butterfly.modulate.a = 1.0
+	butterfly2.modulate.a = 1.0
+	butterfly3.modulate.a = 1.0
+	character.modulate.a = 1.0
+	laddoo_plates.modulate.a = 1.0
+	
+	GameState.selected_episode += 1
+	if GameState.selected_episode > 3:
+		var pannel_scene = preload("res://scenes/pannel.tscn")
+		var pannel_inst = pannel_scene.instantiate()
+		add_child(pannel_inst)
+	else:
+		load_episode()
+		setup_answer_buttons()
+		play_intro_animation()

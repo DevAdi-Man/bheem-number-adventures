@@ -1,7 +1,6 @@
 extends Control
-
-@onready var background_music: AudioStreamPlayer = $BackgroundMusic
 @onready var button_sound: AudioStreamPlayer = $ButtonSound
+@onready var music_button: TextureButton = $UI/MusicButton
 
 @onready var episode_1_button: TextureButton = $UI/EpisodeArea/Episode1Button
 @onready var episode_2_button: TextureButton = $UI/EpisodeArea/Episode2Button
@@ -14,6 +13,7 @@ var three_star_texture = preload("res://assets/ui/1.png")
 
 func _ready() -> void:
 	update_episode_cards()
+	MusicManager.sync_sound_button(music_button)
 
 func update_episode_cards() -> void:
 	print("Episode 1 stars: ", GameState.episode_stars[1])
@@ -72,13 +72,6 @@ func _on_episode_3_button_pressed() -> void:
 	GameState.selected_episode = 3
 	get_tree().change_scene_to_file("res://scenes/play.tscn")
 
-#func _on_episode_4_button_pressed() -> void:
-	#button_sound.play()
-	#if GameState.unlocked_episode < 3:
-		#return
-	#GameState.selected_episode = 3
-	#get_tree().change_scene_to_file("res://scenes/play.tscn")
-
 
 func _on_back_button_pressed() -> void:
 	button_sound.play()
@@ -87,7 +80,5 @@ func _on_back_button_pressed() -> void:
 
 func _on_music_button_pressed() -> void:
 	button_sound.play()
-	if background_music.playing:
-		background_music.stop()
-	else:
-		background_music.play()
+	MusicManager.toggle_music()
+	MusicManager.sync_sound_button(music_button)

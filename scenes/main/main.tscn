@@ -179,11 +179,6 @@ texture_pressed = ExtResource("19_r4lks")
 ignore_texture_size = true
 stretch_mode = 5
 
-[node name="BackgroundMusic" type="AudioStreamPlayer" parent="." unique_id=635241270]
-stream = ExtResource("23_p8abn")
-volume_db = -11.636
-autoplay = true
-
 [node name="ButtonSound" type="AudioStreamPlayer" parent="." unique_id=1321063152]
 stream = ExtResource("24_s17dp")
 
